@@ -93,7 +93,7 @@ export default function RegistrationPage() {
                 disabled={pending}
                 className="w-full rounded-lg bg-blue-600 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-300 disabled:bg-blue-500 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
               >
-                {pending ? 'Registering' : 'Register'}
+                {pending ? 'Registering...' : 'Register'}
               </button>
 
               <p className="text-sm font-light text-gray-500 dark:text-gray-400">
