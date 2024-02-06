@@ -2,6 +2,7 @@ import Container from '@/components/Container';
 import Footer from '@/components/Footer';
 import Header from '@/components/Header';
 import { Inter } from 'next/font/google';
+import { Toaster } from 'sonner';
 import './globals.css';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -22,6 +23,7 @@ export default function RootLayout({ children }) {
           {children}
           <Footer />
         </Container>
+        <Toaster richColors closeButton invert />
       </body>
     </html>
   );

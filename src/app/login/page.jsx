@@ -29,7 +29,7 @@ export default function LoginPage() {
                 Don&apos;t have an account?{' '}
                 <Link
                   href="/register"
-                  class="font-medium text-blue-600 hover:underline dark:text-blue-500"
+                  className="font-medium text-blue-600 hover:underline dark:text-blue-500"
                 >
                   Register here
                 </Link>
