@@ -21,7 +21,7 @@ const userSchema = new Schema(
   { timestamps: true }
 );
 
-// create Comment model
+// create User model
 const User = models.User || model('User', userSchema);
 
 export default User;
