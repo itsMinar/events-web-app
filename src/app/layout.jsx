@@ -1,7 +1,6 @@
 import Container from '@/components/Container';
 import Footer from '@/components/Footer';
 import Header from '@/components/Header';
-import { loggedInRoutes, publicRoutes } from '@/lib/routes';
 import AuthProvider from '@/providers/AuthProvider';
 import { getServerSession } from 'next-auth';
 import { Inter } from 'next/font/google';
@@ -26,7 +25,7 @@ export default async function RootLayout({ children }) {
       >
         <AuthProvider session={session}>
           <Container>
-            <Header routes={session ? loggedInRoutes : publicRoutes} />
+            <Header />
             {children}
             <Footer />
           </Container>

@@ -1,3 +1,4 @@
+import UnderDevelopment from '@/components/UnderDevelopment';
 import { events } from '@/data';
 
 export default function EventPage({ params }) {
@@ -9,6 +10,7 @@ export default function EventPage({ params }) {
       <h1 className="text-3xl font-medium">
         Event Name: <span className="text-lime-600">{event.name}</span>
       </h1>
+      <UnderDevelopment />
     </div>
   );
 }

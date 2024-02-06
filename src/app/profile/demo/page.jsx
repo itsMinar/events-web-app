@@ -1,3 +1,9 @@
+import UnderDevelopment from '@/components/UnderDevelopment';
+
 export default function DemoPage() {
-  return <div>DemoPage</div>;
+  return (
+    <div>
+      <UnderDevelopment />
+    </div>
+  );
 }

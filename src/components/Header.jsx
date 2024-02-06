@@ -1,14 +1,22 @@
 'use client';
 
 import Logo from '@/assets/images/evento.png';
+import { loggedInRoutes, publicRoutes } from '@/lib/routes';
 import { cn } from '@/lib/utils';
 import { motion } from 'framer-motion';
+import { useSession } from 'next-auth/react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
-export default function Header({ routes }) {
+export default function Header() {
   const activePathname = usePathname();
+  const session = useSession();
+
+  let routes = publicRoutes;
+  if (session.status === 'authenticated') {
+    routes = loggedInRoutes;
+  }
 
   return (
     <header className="flex h-14 items-center justify-between border-b border-white/10 px-3 sm:px-9">
