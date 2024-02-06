@@ -7,22 +7,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
-const routes = [
-  {
-    name: 'Home',
-    path: '/',
-  },
-  {
-    name: 'All Events',
-    path: '/events',
-  },
-  {
-    name: 'Log In',
-    path: '/login',
-  },
-];
-
-export default function Header() {
+export default function Header({ routes }) {
   const activePathname = usePathname();
 
   return (

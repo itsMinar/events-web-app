@@ -1,8 +1,12 @@
 import Container from '@/components/Container';
 import Footer from '@/components/Footer';
 import Header from '@/components/Header';
+import { loggedInRoutes, publicRoutes } from '@/lib/routes';
+import AuthProvider from '@/providers/AuthProvider';
+import { getServerSession } from 'next-auth';
 import { Inter } from 'next/font/google';
 import { Toaster } from 'sonner';
+import { authOptions } from './api/auth/[...nextauth]/route';
 import './globals.css';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -12,18 +16,22 @@ export const metadata = {
   description: 'Browse more than 10,000 events worldwide',
 };
 
-export default function RootLayout({ children }) {
+export default async function RootLayout({ children }) {
+  const session = await getServerSession(authOptions);
+
   return (
     <html lang="en">
       <body
         className={`${inter.className} overflow-y-scroll bg-gray-950 text-white`}
       >
-        <Container>
-          <Header />
-          {children}
-          <Footer />
-        </Container>
-        <Toaster richColors closeButton invert />
+        <AuthProvider session={session}>
+          <Container>
+            <Header routes={session ? loggedInRoutes : publicRoutes} />
+            {children}
+            <Footer />
+          </Container>
+          <Toaster richColors closeButton invert />
+        </AuthProvider>
       </body>
     </html>
   );

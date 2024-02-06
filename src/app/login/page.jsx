@@ -1,7 +1,7 @@
 'use client';
 
 import InputWithLabel from '@/components/InputWithLabel';
-import { signIn } from 'next-auth/react';
+import { signIn, useSession } from 'next-auth/react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
@@ -15,6 +15,10 @@ export default function LoginPage() {
   const [pending, setPending] = useState(false);
 
   const router = useRouter();
+  const session = useSession();
+  if (session.status === 'authenticated') {
+    router.push('/');
+  }
 
   const handleInputChange = (e) => {
     setUserInfo((prevInfo) => ({
