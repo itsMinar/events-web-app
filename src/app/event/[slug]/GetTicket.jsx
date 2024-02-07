@@ -2,6 +2,7 @@
 
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
+import { toast } from 'sonner';
 
 export default function GetTicket() {
   const router = useRouter();
@@ -13,7 +14,7 @@ export default function GetTicket() {
       return;
     }
 
-    console.log('okkk');
+    toast.info('This Feature will be Added soon.');
   };
 
   return (
