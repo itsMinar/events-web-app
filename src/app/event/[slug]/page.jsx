@@ -10,7 +10,7 @@ export default async function EventPage({ params }) {
     <main>
       <section className="relative flex items-center justify-center overflow-hidden py-14 md:py-20">
         <Image
-          src={event.imageUrl}
+          src={event.data.imageUrl}
           className="z-0 object-cover blur-3xl"
           alt="Event background image"
           fill
@@ -21,8 +21,8 @@ export default async function EventPage({ params }) {
 
         <div className="z-1 relative flex flex-col gap-6 lg:flex-row lg:gap-16">
           <Image
-            src={event.imageUrl}
-            alt={event.name}
+            src={event.data.imageUrl}
+            alt={event.data.name}
             width={300}
             height={201}
             className="rounded-xl border-2 border-white/50 object-cover"
@@ -30,7 +30,7 @@ export default async function EventPage({ params }) {
 
           <div className="flex flex-col">
             <p className="text-white/75">
-              {new Date(event.date).toLocaleDateString('en-US', {
+              {new Date(event.data.date).toLocaleDateString('en-US', {
                 weekday: 'long',
                 month: 'long',
                 day: 'numeric',
@@ -38,14 +38,15 @@ export default async function EventPage({ params }) {
             </p>
 
             <h1 className=" mb-2 mt-1 whitespace-nowrap text-3xl font-bold tracking-tight lg:text-5xl">
-              {event.name}
+              {event.data.name}
             </h1>
 
             <p className="whitespace-nowrap text-xl text-white/75">
-              Organized by <span className="italic">{event.organizerName}</span>
+              Organized by{' '}
+              <span className="italic">{event.data.organizerName}</span>
             </p>
 
-            <GetTicket availableTickets={event.availableTickets} />
+            <GetTicket availableTickets={event.data.availableTickets} />
           </div>
         </div>
       </section>
@@ -54,14 +55,14 @@ export default async function EventPage({ params }) {
         <section className="mb-12">
           <h2 className="mb-8 text-2xl">About this event</h2>
           <p className="mx-auto max-w-4xl text-lg leading-8 text-white/75">
-            {event.description}
+            {event.data.description}
           </p>
         </section>
 
         <section className="mb-12">
           <h2 className="mb-8 text-2xl">Location</h2>
           <p className="mx-auto max-w-4xl text-lg leading-8 text-white/75">
-            {event.location}
+            {event.data.location}
           </p>
         </section>
       </div>

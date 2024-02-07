@@ -15,8 +15,8 @@ export default async function EventsPage({ params }) {
       </h1>
 
       <Suspense key={1} fallback={<Loading />}>
-        {events.length > 0 ? (
-          <EventsList events={events} />
+        {events.data.length > 0 ? (
+          <EventsList events={events.data} />
         ) : (
           <div className="flex items-center justify-center">
             <h2 className="text-4xl font-medium text-red-500">

@@ -1,5 +1,3 @@
-import { events } from '@/data';
-
 // fetch all events
 export const getEvents = async () => {
   const response = await fetch(`${process.env.API_BASE_URL}/events`, {
@@ -7,7 +5,7 @@ export const getEvents = async () => {
   });
   const events = await response.json();
 
-  return events.data;
+  return events;
 };
 
 // get events filtered by city
@@ -18,11 +16,15 @@ export const getEventsByCity = async (city) => {
   );
   const searchedEvents = await response.json();
 
-  return searchedEvents.data;
+  return searchedEvents;
 };
 
 // get a single event info
 export const getOneEvent = async (slug) => {
-  const event = events.filter((item) => item.slug === slug)[0];
+  const response = await fetch(`${process.env.API_BASE_URL}/events/${slug}`, {
+    cache: 'no-store',
+  });
+  const event = await response.json();
+
   return event;
 };

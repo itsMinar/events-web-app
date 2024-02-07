@@ -13,7 +13,15 @@ export default async function EventsPage() {
       </h1>
 
       <Suspense key={1} fallback={<Loading />}>
-        <EventsList events={events} />
+        {events.data.length > 0 ? (
+          <EventsList events={events.data} />
+        ) : (
+          <div className="flex items-center justify-center">
+            <h2 className="text-4xl font-medium text-red-500">
+              There&apos;s no event right now!
+            </h2>
+          </div>
+        )}
       </Suspense>
     </main>
   );
