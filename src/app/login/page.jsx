@@ -47,7 +47,7 @@ export default function LoginPage() {
         toast.error('Invalid Credentials.');
         return;
       }
-
+      toast.success('Successfully Logged in', { duration: 2000 });
       router.replace('/');
     } catch (error) {
       toast.error(error.message);

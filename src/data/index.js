@@ -3,8 +3,8 @@ export const events = [
     id: 1,
     name: 'DJ Practice Session',
     slug: 'dj-practice-session',
-    city: 'Austin',
-    location: 'Austin Music Hall',
+    city: 'Dhaka',
+    location: 'Dhaka Music Hall',
     date: '2030-10-12T00:00:00.000Z',
     organizerName: 'DJ Inc.',
     imageUrl:
@@ -16,8 +16,8 @@ export const events = [
     id: 2,
     name: 'Harmony Festival',
     slug: 'harmony-festival',
-    city: 'Austin',
-    location: 'Austin Convention Center',
+    city: 'Borishal',
+    location: 'Borishal Convention Center',
     date: '2030-11-15T00:00:00.000Z',
     organizerName: 'Music Enthusiasts LLC',
     imageUrl:
@@ -29,8 +29,8 @@ export const events = [
     id: 3,
     name: '3D Animation Workshop',
     slug: '3d-animation-workshop',
-    city: 'Austin',
-    location: 'Austin Convention Center',
+    city: 'Khulna',
+    location: 'Khulna Convention Center',
     date: '2030-12-08T00:00:00.000Z',
     organizerName: '3D Animators Inc.',
     imageUrl:
@@ -42,8 +42,8 @@ export const events = [
     id: 4,
     name: 'Rock the City Concert',
     slug: 'rock-the-city-concert',
-    city: 'Austin',
-    location: 'Austin Music Hall',
+    city: 'Gopalganj',
+    location: 'Gopalganj Music Hall',
     date: '2030-11-18T00:00:00.000Z',
     organizerName: 'Rock On Productions',
     imageUrl:

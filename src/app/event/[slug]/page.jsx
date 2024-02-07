@@ -1,10 +1,10 @@
-import { events } from '@/data';
+import { getOneEvent } from '@/lib/fetchData';
 import Image from 'next/image';
 import GetTicket from './GetTicket';
 
-export default function EventPage({ params }) {
+export default async function EventPage({ params }) {
   const { slug } = params;
-  const event = events.filter((item) => item.slug === slug)[0];
+  const event = await getOneEvent(slug);
 
   return (
     <main>
