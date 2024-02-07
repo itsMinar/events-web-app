@@ -45,7 +45,7 @@ export default async function EventPage({ params }) {
               Organized by <span className="italic">{event.organizerName}</span>
             </p>
 
-            <GetTicket />
+            <GetTicket availableTickets={event.availableTickets} />
           </div>
         </div>
       </section>

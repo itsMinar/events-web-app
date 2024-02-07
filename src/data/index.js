@@ -5,6 +5,7 @@ export const events = [
     slug: 'dj-practice-session',
     city: 'Dhaka',
     location: 'Dhaka Music Hall',
+    availableTickets: 20,
     date: '2030-10-12T00:00:00.000Z',
     organizerName: 'DJ Inc.',
     imageUrl:
