@@ -1,17 +1,33 @@
 import connectDB from '@/db';
 import { ApiResponse } from '@/lib/ApiResponse';
+import { capitalize } from '@/lib/utils';
 import Event from '@/models/Event.model';
 
 // Get All Events - GET Request
 export async function GET(req, res) {
+  const searchParams = req.nextUrl.searchParams;
+  const myParam = searchParams.get('city');
+
   try {
     await connectDB();
 
-    const events = await Event.find();
+    if (myParam) {
+      const searchedEvents = await Event.find({ city: capitalize(myParam) });
+
+      return Response.json(
+        new ApiResponse(
+          200,
+          searchedEvents,
+          `Events in ${myParam} fetched Successfully.`
+        )
+      );
+    }
+
+    const allEvents = await Event.find();
 
     // return response
     return Response.json(
-      new ApiResponse(200, events, 'Events Data fetched Successfully.')
+      new ApiResponse(200, allEvents, 'All Events fetched Successfully.')
     );
   } catch (error) {
     return Response.json(new ApiResponse(500, null, error.message));
