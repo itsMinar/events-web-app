@@ -1,12 +1,16 @@
-export const publicRoutes = [
+const routes = [
   {
     name: 'Home',
     path: '/',
   },
   {
     name: 'All Events',
-    path: '/events',
+    path: '/events/all',
   },
+];
+
+export const publicRoutes = [
+  ...routes,
   {
     name: 'Log In',
     path: '/login',
@@ -14,14 +18,7 @@ export const publicRoutes = [
 ];
 
 export const userRoutes = [
-  {
-    name: 'Home',
-    path: '/',
-  },
-  {
-    name: 'All Events',
-    path: '/events',
-  },
+  ...routes,
   {
     name: 'Profile',
     path: '/profile',
@@ -29,14 +26,7 @@ export const userRoutes = [
 ];
 
 export const adminRoutes = [
-  {
-    name: 'Home',
-    path: '/',
-  },
-  {
-    name: 'All Events',
-    path: '/events',
-  },
+  ...routes,
   {
     name: 'Admin Panel',
     path: '/admin',

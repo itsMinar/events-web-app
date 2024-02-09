@@ -2,8 +2,17 @@ import { getOneEvent } from '@/lib/fetchData';
 import Image from 'next/image';
 import GetTicket from './GetTicket';
 
+export async function generateMetadata({ params }) {
+  const slug = params.slug;
+  const event = await getOneEvent(slug);
+
+  return {
+    title: event.data.name,
+  };
+}
+
 export default async function EventPage({ params }) {
-  const { slug } = params;
+  const slug = params.slug;
   const event = await getOneEvent(slug);
 
   return (

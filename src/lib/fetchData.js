@@ -1,17 +1,7 @@
-// fetch all events
-export const getEvents = async () => {
-  const response = await fetch(`${process.env.API_BASE_URL}/events`, {
-    cache: 'no-store',
-  });
-  const events = await response.json();
-
-  return events;
-};
-
-// get events filtered by city
-export const getEventsByCity = async (city) => {
+// get Events
+export const getEvents = async (city = 'all', pageNumber = 1) => {
   const response = await fetch(
-    `${process.env.API_BASE_URL}/events?city=${city}`,
+    `${process.env.API_BASE_URL}/events?city=${city}&page=${pageNumber}`,
     { cache: 'no-store' }
   );
   const searchedEvents = await response.json();
@@ -21,9 +11,7 @@ export const getEventsByCity = async (city) => {
 
 // get a single event info
 export const getOneEvent = async (slug) => {
-  const response = await fetch(`${process.env.API_BASE_URL}/events/${slug}`, {
-    cache: 'no-store',
-  });
+  const response = await fetch(`${process.env.API_BASE_URL}/events/${slug}`);
   const event = await response.json();
 
   return event;

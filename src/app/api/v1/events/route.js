@@ -17,19 +17,21 @@ export async function GET(req, res) {
   try {
     await connectDB();
 
-    const allEvents = city
-      ? await Event.find({ city: capitalize(city) })
-          .skip((pageNum - 1) * limitNum)
-          .limit(limitNum)
-          .sort({ createdAt: -1 })
-      : await Event.find()
-          .skip((pageNum - 1) * limitNum)
-          .limit(limitNum)
-          .sort({ createdAt: -1 });
+    const allEvents =
+      city === 'all'
+        ? await Event.find()
+            .skip((pageNum - 1) * limitNum)
+            .limit(limitNum)
+            .sort({ createdAt: -1 })
+        : await Event.find({ city: capitalize(city) })
+            .skip((pageNum - 1) * limitNum)
+            .limit(limitNum)
+            .sort({ createdAt: -1 });
 
-    const totalEvents = city
-      ? await Event.countDocuments({ city: capitalize(city) })
-      : await Event.estimatedDocumentCount();
+    const totalEvents =
+      city === 'all'
+        ? await Event.estimatedDocumentCount()
+        : await Event.countDocuments({ city: capitalize(city) });
 
     // return response
     return NextResponse.json(

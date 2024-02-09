@@ -2,6 +2,7 @@
 
 import { signOut } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
+import { toast } from 'sonner';
 
 export default function LogoutButton() {
   const router = useRouter();
@@ -10,7 +11,7 @@ export default function LogoutButton() {
     await signOut({
       redirect: false,
     });
-
+    toast.success('Successfully Logged out', { duration: 2000 });
     router.replace('/');
   };
 
