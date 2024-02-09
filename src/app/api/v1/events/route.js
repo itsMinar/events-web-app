@@ -7,7 +7,7 @@ import { NextResponse } from 'next/server';
 // Get All Events - GET Request
 export async function GET(req, res) {
   const searchParams = req.nextUrl.searchParams;
-  const city = searchParams.get('city');
+  const city = searchParams.get('city') || 'all';
   const page = searchParams.get('page');
   const limit = searchParams.get('limit');
 
@@ -28,16 +28,20 @@ export async function GET(req, res) {
             .limit(limitNum)
             .sort({ createdAt: -1 });
 
+    // calculate total events number
     const totalEvents =
       city === 'all'
         ? await Event.estimatedDocumentCount()
         : await Event.countDocuments({ city: capitalize(city) });
 
+    // calculate total page number
+    const totalPage = Math.ceil(totalEvents / limitNum);
+
     // return response
     return NextResponse.json(
       new ApiResponse(
         200,
-        { allEvents, totalEvents },
+        { allEvents, totalEvents, totalPage },
         'All Events fetched Successfully.'
       )
     );

@@ -27,6 +27,11 @@ export default async function EventsPage({ params, searchParams }) {
 
   const events = fetchedData.data?.allEvents;
   const totalEvents = fetchedData.data?.totalEvents;
+  const totalPage = fetchedData.data?.totalPage;
+
+  if (totalPage < parsedPage.data) {
+    redirect(`/events/${city}?page=${totalPage}`);
+  }
 
   return (
     <main className="flex min-h-[110vh] flex-col items-center px-[20px] py-24">
