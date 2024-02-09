@@ -13,7 +13,7 @@ export const publicRoutes = [
   },
 ];
 
-export const loggedInRoutes = [
+export const userRoutes = [
   {
     name: 'Home',
     path: '/',
@@ -25,5 +25,20 @@ export const loggedInRoutes = [
   {
     name: 'Profile',
     path: '/profile',
+  },
+];
+
+export const adminRoutes = [
+  {
+    name: 'Home',
+    path: '/',
+  },
+  {
+    name: 'All Events',
+    path: '/events',
+  },
+  {
+    name: 'Admin Panel',
+    path: '/admin',
   },
 ];

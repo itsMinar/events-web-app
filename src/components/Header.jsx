@@ -1,7 +1,7 @@
 'use client';
 
 import Logo from '@/assets/images/evento.png';
-import { loggedInRoutes, publicRoutes } from '@/lib/routes';
+import { adminRoutes, publicRoutes, userRoutes } from '@/lib/routes';
 import { cn } from '@/lib/utils';
 import { motion } from 'framer-motion';
 import { useSession } from 'next-auth/react';
@@ -12,10 +12,11 @@ import { usePathname } from 'next/navigation';
 export default function Header() {
   const activePathname = usePathname();
   const session = useSession();
+  const role = session.data?.role;
 
   let routes = publicRoutes;
   if (session.status === 'authenticated') {
-    routes = loggedInRoutes;
+    role === 'admin' ? (routes = adminRoutes) : (routes = userRoutes);
   }
 
   return (
