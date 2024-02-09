@@ -2,35 +2,45 @@ import connectDB from '@/db';
 import { ApiResponse } from '@/lib/ApiResponse';
 import { capitalize } from '@/lib/utils';
 import Event from '@/models/Event.model';
+import { NextResponse } from 'next/server';
 
 // Get All Events - GET Request
 export async function GET(req, res) {
   const searchParams = req.nextUrl.searchParams;
-  const myParam = searchParams.get('city');
+  const city = searchParams.get('city');
+  const page = searchParams.get('page');
+  const limit = searchParams.get('limit');
+
+  const pageNum = parseInt(page) || 1;
+  const limitNum = parseInt(limit) || 6;
 
   try {
     await connectDB();
 
-    if (myParam) {
-      const searchedEvents = await Event.find({ city: capitalize(myParam) });
+    const allEvents = city
+      ? await Event.find({ city: capitalize(city) })
+          .skip((pageNum - 1) * limitNum)
+          .limit(limitNum)
+          .sort({ createdAt: -1 })
+      : await Event.find()
+          .skip((pageNum - 1) * limitNum)
+          .limit(limitNum)
+          .sort({ createdAt: -1 });
 
-      return Response.json(
-        new ApiResponse(
-          200,
-          searchedEvents,
-          `Events in ${myParam} fetched Successfully.`
-        )
-      );
-    }
-
-    const allEvents = await Event.find();
+    const totalEvents = city
+      ? await Event.countDocuments({ city: capitalize(city) })
+      : await Event.estimatedDocumentCount();
 
     // return response
-    return Response.json(
-      new ApiResponse(200, allEvents, 'All Events fetched Successfully.')
+    return NextResponse.json(
+      new ApiResponse(
+        200,
+        { allEvents, totalEvents },
+        'All Events fetched Successfully.'
+      )
     );
   } catch (error) {
-    return Response.json(new ApiResponse(500, null, error.message));
+    return NextResponse.json(new ApiResponse(500, null, error.message));
   }
 }
 
@@ -63,7 +73,7 @@ export async function POST(req, res) {
       !imageUrl ||
       !description
     ) {
-      return Response.json(
+      return NextResponse.json(
         new ApiResponse(400, null, 'All fields are required')
       );
     }
@@ -71,7 +81,9 @@ export async function POST(req, res) {
     // check if event already exists: slug
     const eventEsist = await Event.findOne({ slug });
     if (eventEsist) {
-      return Response.json(new ApiResponse(409, null, 'Event already exists'));
+      return NextResponse.json(
+        new ApiResponse(409, null, 'Event already exists')
+      );
     }
 
     // create event object - create entry in DB
@@ -89,7 +101,7 @@ export async function POST(req, res) {
 
     // check for event creation
     if (!event) {
-      return Response.json(
+      return NextResponse.json(
         new ApiResponse(
           500,
           null,
@@ -99,10 +111,10 @@ export async function POST(req, res) {
     }
 
     // return response
-    return Response.json(
+    return NextResponse.json(
       new ApiResponse(201, event, 'Event Added Successfully!')
     );
   } catch (error) {
-    return Response.json(new ApiResponse(500, null, error.message));
+    return NextResponse.json(new ApiResponse(500, null, error.message));
   }
 }
