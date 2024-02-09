@@ -9,10 +9,18 @@ import { toast } from 'sonner';
 export default function GetTicket({ availableTickets }) {
   const router = useRouter();
   const session = useSession();
+  const role = session.data?.role;
 
   const handleGetTicket = () => {
     if (session.status === 'unauthenticated') {
       router.push('/login');
+      return;
+    }
+
+    if (role === 'admin') {
+      toast.info('Admin can not buy Ticket.', {
+        position: 'top-center',
+      });
       return;
     }
 
