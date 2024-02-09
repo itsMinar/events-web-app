@@ -10,7 +10,7 @@ export default function HomePage() {
 
       <p className="mb-12 mt-7 text-2xl opacity-75 lg:text-3xl">
         Browse more than{' '}
-        <span className="font-bold italic text-accent underline">
+        <span className="text-accentOg font-bold italic underline">
           10,000 events
         </span>{' '}
         around you

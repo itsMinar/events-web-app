@@ -11,7 +11,9 @@ export const getEvents = async (city = 'all', pageNumber = 1) => {
 
 // get a single event info
 export const getOneEvent = async (slug) => {
-  const response = await fetch(`${process.env.API_BASE_URL}/events/${slug}`);
+  const response = await fetch(`${process.env.API_BASE_URL}/events/${slug}`, {
+    cache: 'no-store',
+  });
   const event = await response.json();
 
   return event;

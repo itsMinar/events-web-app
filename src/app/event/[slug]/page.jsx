@@ -55,7 +55,10 @@ export default async function EventPage({ params }) {
               <span className="italic">{event.data.organizerName}</span>
             </p>
 
-            <GetTicket availableTickets={event.data.availableTickets} />
+            <GetTicket
+              slug={slug}
+              availableTickets={event.data.availableTickets}
+            />
           </div>
         </div>
       </section>

@@ -43,7 +43,7 @@ export default function Header() {
               {activePathname === route.path && (
                 <motion.div
                   layoutId="header-active-link"
-                  className="absolute bottom-0 h-1 w-full bg-accent"
+                  className="bg-accentOg absolute bottom-0 h-1 w-full"
                 ></motion.div>
               )}
             </li>

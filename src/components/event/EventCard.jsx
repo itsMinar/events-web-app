@@ -53,7 +53,7 @@ export default function EventCard({ event }) {
               day: '2-digit',
             })}
           </p>
-          <p className="text-xs uppercase text-accent">
+          <p className="text-accentOg text-xs uppercase">
             {new Date(event.date).toLocaleDateString('en-US', {
               month: 'short',
             })}
