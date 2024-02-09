@@ -75,7 +75,7 @@ export default function GetTicket({ slug, availableTickets }) {
             Get tickets
           </button>
         </DrawerTrigger>
-        <DrawerContent className="mx-auto w-2/3 items-center bg-gray-950">
+        <DrawerContent className="mx-auto w-full items-center bg-gray-950 md:w-2/3">
           <DrawerHeader>
             <DrawerTitle>How many tickets do you want to Buy?</DrawerTitle>
           </DrawerHeader>
@@ -98,7 +98,7 @@ export default function GetTicket({ slug, availableTickets }) {
               variant="outline"
               size="icon"
               className="h-8 w-8 shrink-0 rounded-full"
-              onClick={() => setTicketCount((prevCount) => prevCount + 21)}
+              onClick={() => setTicketCount((prevCount) => prevCount + 1)}
               disabled={ticketCount >= availableTickets}
             >
               +<span className="sr-only">Increase</span>
