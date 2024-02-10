@@ -1,7 +1,11 @@
 // get Events
-export const getEvents = async (city = 'all', pageNumber = 1) => {
+export const getEvents = async ({
+  city = 'all',
+  pageNumber = 1,
+  limit = 6,
+}) => {
   const response = await fetch(
-    `${process.env.API_BASE_URL}/events?city=${city}&page=${pageNumber}`,
+    `${process.env.API_BASE_URL}/events?city=${city}&page=${pageNumber}&limit=${limit}`,
     { cache: 'no-store' }
   );
   const searchedEvents = await response.json();

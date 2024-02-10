@@ -23,7 +23,7 @@ export default async function EventsPage({ params, searchParams }) {
     redirect('/events/all');
   }
 
-  const fetchedData = await getEvents(city, parsedPage.data);
+  const fetchedData = await getEvents({ city, pageNumber: parsedPage.data });
 
   const events = fetchedData.data?.allEvents;
   const totalEvents = fetchedData.data?.totalEvents;
