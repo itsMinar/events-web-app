@@ -17,3 +17,16 @@ export async function buyTickets(slug, tickets) {
 
   return data;
 }
+
+// Add event
+export async function addEvent(eventDetails) {
+  const res = await fetch(`${process.env.API_BASE_URL}/events`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(eventDetails),
+  });
+
+  return res.json();
+}

@@ -1,6 +1,7 @@
 import Container from '@/components/Container';
 import Footer from '@/components/Footer';
 import Header from '@/components/Header';
+import { EdgeStoreProvider } from '@/lib/edgestore';
 import AuthProvider from '@/providers/AuthProvider';
 import { getServerSession } from 'next-auth';
 import { Inter } from 'next/font/google';
@@ -19,16 +20,18 @@ export default async function RootLayout({ children }) {
   const session = await getServerSession(authOptions);
 
   return (
-    <html lang="en" className='dark'>
+    <html lang="en" className="dark">
       <body
         className={`${inter.className} overflow-y-scroll bg-gray-950 text-white`}
       >
         <AuthProvider session={session}>
-          <Container>
-            <Header />
-            {children}
-            <Footer />
-          </Container>
+          <EdgeStoreProvider>
+            <Container>
+              <Header />
+              {children}
+              <Footer />
+            </Container>
+          </EdgeStoreProvider>
           <Toaster richColors closeButton invert />
         </AuthProvider>
       </body>
