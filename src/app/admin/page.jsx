@@ -1,13 +1,9 @@
-import LogoutButton from '@/components/LogoutButton';
-import UnderDevelopment from '@/components/UnderDevelopment';
-
 export default function AdminPage() {
   return (
-    <div>
-      <h2 className="text-2xl font-medium">Welcome to Admin Panel</h2>
-      <LogoutButton />
-
-      <UnderDevelopment />
+    <div className="mt-20">
+      <h1 className="text-center text-4xl font-bold text-gray-700 md:text-5xl lg:text-6xl">
+        Welcome to Admin Panel
+      </h1>
     </div>
   );
 }
