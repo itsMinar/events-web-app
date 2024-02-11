@@ -6,6 +6,7 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
+import DeleteEventButton from './DeleteEventButton';
 
 export default function EventsTable({ events }) {
   return (
@@ -18,7 +19,8 @@ export default function EventsTable({ events }) {
             <TableHead>City</TableHead>
             <TableHead>Location</TableHead>
             <TableHead>Date</TableHead>
-            <TableHead className="text-right">Available Tickets</TableHead>
+            <TableHead>Available Tickets</TableHead>
+            <TableHead className="text-right">Actions</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -29,8 +31,9 @@ export default function EventsTable({ events }) {
               <TableCell>{event.city}</TableCell>
               <TableCell>{event.location}</TableCell>
               <TableCell>{event.date}</TableCell>
+              <TableCell>{event.availableTickets}</TableCell>
               <TableCell className="text-right">
-                {event.availableTickets}
+                <DeleteEventButton slug={event.slug} />
               </TableCell>
             </TableRow>
           ))}

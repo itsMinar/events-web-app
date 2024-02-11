@@ -66,3 +66,24 @@ export async function PATCH(req, { params }) {
     return NextResponse.json(new ApiResponse(500, null, error.message));
   }
 }
+
+// DELETE ticket info - availableTickets
+export async function DELETE(req, { params }) {
+  const { slug } = params;
+
+  try {
+    await connectDB();
+
+    const event = await Event.findOneAndDelete({ slug });
+    if (!event) {
+      return NextResponse.json(new ApiResponse(404, null, 'Event not found!'));
+    }
+
+    // return response
+    return NextResponse.json(
+      new ApiResponse(200, null, `Event deleted Successfully.`)
+    );
+  } catch (error) {
+    return NextResponse.json(new ApiResponse(500, null, error.message));
+  }
+}

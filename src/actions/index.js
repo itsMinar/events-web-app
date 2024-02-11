@@ -13,7 +13,9 @@ export async function buyTickets(slug, tickets) {
   });
   const data = await res.json();
 
-  revalidatePath(`events/${slug}`);
+  if (data.success) {
+    revalidatePath(`events/${slug}`);
+  }
 
   return data;
 }
@@ -29,4 +31,21 @@ export async function addEvent(eventDetails) {
   });
 
   return res.json();
+}
+
+// Delete event
+export async function deleteEvent(eventSlug) {
+  const res = await fetch(`${process.env.API_BASE_URL}/events/${eventSlug}`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+  const data = await res.json();
+
+  if (data.success) {
+    revalidatePath(`admin/events/${eventSlug}`);
+  }
+
+  return data;
 }
