@@ -1,6 +1,3 @@
-import LogoutButton from '@/components/LogoutButton';
-import UnderDevelopment from '@/components/UnderDevelopment';
-
 export function generateMetadata() {
   return {
     title: 'Profile',
@@ -9,11 +6,10 @@ export function generateMetadata() {
 
 export default function ProfilePage() {
   return (
-    <div>
-      <h2 className="text-2xl font-medium">Welcome to Profile</h2>
-      <LogoutButton />
-
-      <UnderDevelopment />
+    <div className="mt-20">
+      <h1 className="text-center text-4xl font-bold text-gray-700 md:text-5xl lg:text-6xl">
+        Welcome to Profile Page
+      </h1>
     </div>
   );
 }

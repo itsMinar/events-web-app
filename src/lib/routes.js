@@ -17,13 +17,7 @@ export const publicRoutes = [
   },
 ];
 
-export const userRoutes = [
-  ...routes,
-  {
-    name: 'Profile',
-    path: '/profile',
-  },
-];
+export const userRoutes = [...routes];
 
 export const adminRoutes = [
   ...routes,

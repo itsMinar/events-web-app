@@ -8,6 +8,7 @@ import { useSession } from 'next-auth/react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import UserProfile from './UserProfile';
 
 export default function Header() {
   const activePathname = usePathname();
@@ -43,11 +44,20 @@ export default function Header() {
               {activePathname === route.path && (
                 <motion.div
                   layoutId="header-active-link"
-                  className="bg-accentOg absolute bottom-0 h-1 w-full"
+                  className="absolute bottom-0 h-1 w-full bg-accentOg"
                 ></motion.div>
               )}
             </li>
           ))}
+
+          {role === 'user' && (
+            <li className="relative flex items-center transition hover:text-white">
+              <UserProfile
+                fullName={session.data?.fullname}
+                email={session.data?.email}
+              />
+            </li>
+          )}
         </ul>
       </nav>
     </header>
