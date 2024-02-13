@@ -11,17 +11,20 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import { adminRoutes } from '@/lib/routes';
 import { signOut } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
 
-export default function UserProfile({ fullName, email }) {
+export default function AdminProfile({ fullName, email }) {
   const router = useRouter();
 
+  // navigate to specific route
   const handleNavigate = (route) => {
     router.push(route);
   };
 
+  // Logout functionality
   const handleLogout = async () => {
     await signOut({
       redirect: false,
@@ -35,8 +38,8 @@ export default function UserProfile({ fullName, email }) {
       <DropdownMenuTrigger asChild>
         <Button variant="ghost" className="relative h-8 w-8 rounded-full">
           <Avatar className="h-8 w-8">
-            <AvatarImage src="/avatars/user.png" alt="avatar" />
-            <AvatarFallback>U</AvatarFallback>
+            <AvatarImage src="/avatars/admin.png" alt="avatar" />
+            <AvatarFallback>A</AvatarFallback>
           </Avatar>
         </Button>
       </DropdownMenuTrigger>
@@ -51,14 +54,15 @@ export default function UserProfile({ fullName, email }) {
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
-          <DropdownMenuItem
-            className="cursor-pointer"
-            onClick={() => handleNavigate('/profile')}
-          >
-            Profile
-          </DropdownMenuItem>
-          <DropdownMenuItem>Tickets</DropdownMenuItem>
-          <DropdownMenuItem>Settings</DropdownMenuItem>
+          {adminRoutes.map((route) => (
+            <DropdownMenuItem
+              key={route.label}
+              className="cursor-pointer"
+              onClick={() => handleNavigate(route.path)}
+            >
+              {route.label}
+            </DropdownMenuItem>
+          ))}
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuItem className="cursor-pointer" onClick={handleLogout}>

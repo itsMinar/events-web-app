@@ -1,4 +1,4 @@
-const routes = [
+export const routes = [
   {
     name: 'Home',
     path: '/',
@@ -9,20 +9,17 @@ const routes = [
   },
 ];
 
-export const publicRoutes = [
-  ...routes,
-  {
-    name: 'Log In',
-    path: '/login',
-  },
-];
-
-export const userRoutes = [...routes];
-
 export const adminRoutes = [
-  ...routes,
   {
-    name: 'Admin Panel',
-    path: '/admin',
+    label: 'Dashboard',
+    path: '/admin/dashboard',
+  },
+  {
+    label: 'Events List',
+    path: '/admin/events',
+  },
+  {
+    label: 'Add Event',
+    path: '/admin/add-events',
   },
 ];

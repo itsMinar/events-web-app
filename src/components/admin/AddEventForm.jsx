@@ -1,12 +1,14 @@
 'use client';
 
 import { addEvent } from '@/actions';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Textarea } from '@/components/ui/textarea';
 import { useEdgeStore } from '@/lib/edgestore';
 import { createSlug } from '@/lib/utils';
 import { useRef, useState } from 'react';
 import { toast } from 'sonner';
 import { Button } from '../ui/button';
-import InputWithLabel from './InputWithLabel';
 
 const initialData = {
   name: '',
@@ -77,81 +79,110 @@ export default function AddEventForm() {
   };
 
   return (
-    <div className="ml-6 mt-6">
-      <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-        <InputWithLabel
-          label="Event Name"
-          fieldName="name"
-          value={eventInfo.name}
-          onChange={handleInputChange}
-        />
-        <InputWithLabel
-          label="Organizer's Name"
-          fieldName="organizerName"
-          value={eventInfo.organizerName}
-          onChange={handleInputChange}
-        />
-        <InputWithLabel
-          label="City"
-          fieldName="city"
-          value={eventInfo.city}
-          onChange={handleInputChange}
-        />
-        <InputWithLabel
-          label="Location"
-          fieldName="location"
-          value={eventInfo.location}
-          onChange={handleInputChange}
-        />
-        <InputWithLabel
-          label="Total Tickets"
-          fieldName="availableTickets"
-          type="number"
-          value={eventInfo.availableTickets}
-          onChange={handleInputChange}
-        />
-        <div className="flex flex-col gap-1">
-          <label className="text-lg" htmlFor="eventCover">
-            Event Cover Photo
-          </label>
-          <input
-            required
-            ref={imgInputRef}
-            type="file"
-            accept="image/*"
-            id="eventCover"
-            name="eventCover"
-            onChange={(e) => {
-              setImgFile(e.target.files?.[0]);
-            }}
-            className="w-2/3 rounded-md border bg-transparent py-1 pl-2 text-lg"
-          />
+    <form onSubmit={handleSubmit}>
+      <div className="space-y-4">
+        <div className="grid grid-cols-1 gap-4">
+          <div className="grid grid-cols-2 gap-4">
+            <div className="space-y-2">
+              <Label htmlFor="name">Event Name</Label>
+              <Input
+                id="name"
+                name="name"
+                value={eventInfo.name}
+                onChange={handleInputChange}
+                placeholder="Music Festival"
+                required
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="organizerName">Organizer Name</Label>
+              <Input
+                id="organizerName"
+                name="organizerName"
+                value={eventInfo.organizerName}
+                onChange={handleInputChange}
+                placeholder="Music World Inc"
+                required
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="city">City</Label>
+              <Input
+                id="city"
+                name="city"
+                value={eventInfo.city}
+                onChange={handleInputChange}
+                placeholder="Dhaka"
+                required
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="location">Location</Label>
+              <Input
+                id="location"
+                name="location"
+                value={eventInfo.location}
+                onChange={handleInputChange}
+                placeholder="Army Stadium"
+                required
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="availableTickets">Available Tickets</Label>
+              <Input
+                id="availableTickets"
+                name="availableTickets"
+                value={eventInfo.availableTickets}
+                onChange={handleInputChange}
+                placeholder="100"
+                required
+                type="number"
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="date">Date</Label>
+              <Input
+                id="date"
+                name="date"
+                value={eventInfo.date}
+                onChange={handleInputChange}
+                required
+                type="date"
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="eventCover">Cover Photo</Label>
+              <Input
+                ref={imgInputRef}
+                id="eventCover"
+                name="eventCover"
+                onChange={(e) => {
+                  setImgFile(e.target.files?.[0]);
+                }}
+                required
+                type="file"
+                accept="image/*"
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="description">Description</Label>
+              <Textarea
+                id="description"
+                name="description"
+                value={eventInfo.description}
+                onChange={handleInputChange}
+                placeholder="Enter a brief description of the event."
+                required
+              />
+            </div>
+          </div>
+          <div className="flex justify-center">
+            <Button type="submit" disabled={pending} className="w-2/12">
+              {pending ? 'Adding...' : 'Add Event'}
+            </Button>
+          </div>
         </div>
-        <InputWithLabel
-          label="Date"
-          fieldName="date"
-          type="date"
-          value={eventInfo.date}
-          onChange={handleInputChange}
-        />
-        <div className="flex flex-col gap-1">
-          <label className="text-lg" htmlFor="description">
-            Description
-          </label>
-          <textarea
-            name="description"
-            id="description"
-            rows="8"
-            value={eventInfo.description}
-            onChange={handleInputChange}
-            className="w-2/3 rounded-md border bg-transparent py-1 pl-2 text-lg"
-          ></textarea>
-        </div>
-
-        <Button disabled={pending} type="submit">
-          {pending ? 'Adding...' : 'Add Event'}
-        </Button>
-      </form>
-    </div>
+      </div>
+    </form>
   );
 }
