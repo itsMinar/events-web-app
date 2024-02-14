@@ -11,7 +11,7 @@ export function capitalize(string) {
 
 export function createSlug(title, city) {
   const processedTitle = title.trim().toLowerCase().replace(/ /g, '-');
-  const processedCity = city.trim().toLowerCase();
+  const processedCity = city.trim().toLowerCase().replace(/ /g, '-');
 
   const slug = processedTitle + '-' + processedCity;
   return slug;
